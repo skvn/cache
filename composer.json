@@ -6,8 +6,7 @@
   "require": {
     "php": ">=7.0.0",
     "skvn/base": "dev-master",
-    "skvn/event": "dev-master",
-    "skvn/app": "dev-master"
+    "skvn/event": "dev-master"
   },
   "autoload": {
     "psr-4": {
