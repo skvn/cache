@@ -23,12 +23,17 @@ class CacheDispatcher
 
     protected function createStorage($name)
     {
-        if (!isset($this->config['storages'][$name])) {
+        $conf = $this->config['storages'][$name] ?? null;
+        if (empty($conf)) {
             throw new Exceptions\CacheException('Cache storage ' . $name . ' do not exists');
         }
-        $class = $this->config['storages'][$name]['class'];
-        $this->storages[$name] = new $class($this->config['storages'][$name]);
-        $this->storages[$name]->setKeySuffix($this->config['key_suffix']);
+        $class = $conf['class'];
+        $storage = new $class($conf);
+        $storage->setKeySuffix($this->config['key_suffix']);
+        foreach ($conf['decorate'] ?? [] as $decorator) {
+            $storage = new $decorator(['cache' => $storage]);
+        }
+        $this->storages[$name] = $storage;
         return $this->storages[$name];
     }
 

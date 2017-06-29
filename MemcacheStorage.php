@@ -23,7 +23,8 @@ class MemcacheStorage extends Storage
 
     function get($key)
     {
-        return $this->getMemcache()->get($this->getKey($key));
+        $v = $this->getMemcache()->get($this->getKey($key));
+        return $v === false ? null : $v;
     }
 
     function set($key, $value, $ttl = 0)
@@ -54,7 +55,13 @@ class MemcacheStorage extends Storage
             if (!is_numeric($slabid)) {
                 continue;
             }
+            if (empty($slab['used_chunks'])) {
+                continue;
+            }
             $content = $this->getMemcache()->getStats('cachedump', intval($slabid), 1000000);
+            if ($content === false) {
+                var_dump('FAILED: ' . $slabid);
+            }
             if (is_array($content)) {
                 foreach ($content as $key => $info) {
                     if (!empty($pattern)) {
