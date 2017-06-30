@@ -29,6 +29,7 @@ class CacheDispatcher
         }
         $class = $conf['class'];
         $storage = new $class($conf);
+        $storage->setApp($this->app);
         $storage->setKeySuffix($this->config['key_suffix']);
         foreach ($conf['decorate'] ?? [] as $decorator) {
             $storage = new $decorator(['cache' => $storage]);

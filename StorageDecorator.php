@@ -45,4 +45,10 @@ abstract class StorageDecorator extends Storage
     {
         return $this->cache->keys($pattern , $full);
     }
+
+    function __call($method, $args)
+    {
+        return $this->cache->$method(...$args);
+    }
+
 }
