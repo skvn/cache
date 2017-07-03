@@ -33,5 +33,11 @@ class SingleGetDecorator extends StorageDecorator
         return $add;
     }
 
+    function delete($key)
+    {
+        unset($this->storage[$key]);
+        return $this->cache->delete($key);
+    }
+
 
 }
