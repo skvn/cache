@@ -54,7 +54,7 @@ abstract class Storage
     {
         $this->lock($name, $seconds, $throw);
         $callback();
-        $this->unlock();
+        $this->unlock($name);
     }
 
     function unlock($name)
