@@ -62,6 +62,16 @@ abstract class Storage
     {
         $this->delete($name);
     }
+    
+    function getValue($key, callable $callback, $ttl = 0)
+    {
+        $value = $this->get($key);
+        if (is_null($value)) {
+            $value = $callback();
+            $this->set($key, $value, $ttl);
+        }
+        return $value;
+    }
 
 
 }
