@@ -40,6 +40,11 @@ abstract class StorageDecorator extends Storage
     {
         return $this->cache->flush();
     }
+    
+    function increment($key, $value = 1)
+    {
+        return $this->cache->increment($key, $value);
+    }
 
     function keys($pattern = null, $full = false)
     {

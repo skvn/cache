@@ -41,6 +41,11 @@ class MemcacheStorage extends Storage
     {
         return $this->getMemcache()->delete($this->getKey($key));
     }
+    
+    function increment($key, $value = 1)
+    {
+        return $this->getMemcache()->increment($this->getKey($key), $value);
+    }
 
     function flush()
     {

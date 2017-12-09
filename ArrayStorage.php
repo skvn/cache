@@ -28,6 +28,11 @@ class ArrayStorage extends Storage
         unset($this->storage[$this->getKey($key)]);
         return true;
     }
+    
+    function increment($key, $value = 1)
+    {
+        $this->storage[$this->getKey($key)] += $value;
+    }
 
     function flush()
     {

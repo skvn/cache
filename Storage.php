@@ -20,6 +20,7 @@ abstract class Storage
     abstract function delete($key);
     abstract function flush();
     abstract function keys($pattern = null, $full = false);
+    abstract function increment($key, $value = 1);
 
     function getKey($key)
     {
