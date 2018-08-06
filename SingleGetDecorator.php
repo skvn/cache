@@ -43,6 +43,11 @@ class SingleGetDecorator extends StorageDecorator
     {
         return $this->cache->increment($key, $value);
     }
+    
+    function resetStorage()
+    {
+        $this->storage = [];
+    }
 
 
 }
