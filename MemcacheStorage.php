@@ -64,9 +64,6 @@ class MemcacheStorage extends Storage
                 continue;
             }
             $content = $this->getMemcache()->getStats('cachedump', intval($slabid), 1000000);
-            if ($content === false) {
-                var_dump('FAILED: ' . $slabid);
-            }
             if (is_array($content)) {
                 foreach ($content as $key => $info) {
                     if (!empty($pattern)) {
